@@ -2,6 +2,9 @@ package com.vidi.timetrack.activities;
 
 import javax.inject.Inject;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import roboguice.activity.RoboActivity;
 import roboguice.inject.ContentView;
 import roboguice.inject.InjectResource;
@@ -23,6 +26,8 @@ import com.vidi.timetrack.R;
 @ContentView(R.layout.activity_login)
 public class LoginActivity extends RoboActivity implements OnEditorActionListener, OnClickListener
 {
+	private static final Logger LOGGER = LoggerFactory.getLogger(LoginActivity.class);
+
 	@InjectView(R.id.username)
 	private EditText usernameField;
 	@InjectView(R.id.password)
@@ -86,6 +91,8 @@ public class LoginActivity extends RoboActivity implements OnEditorActionListene
 
 	public void attemptLogin()
 	{
+		LOGGER.info("attempt to login.");
+
 		usernameField.setError(null);
 		passwordField.setError(null);
 
@@ -96,22 +103,26 @@ public class LoginActivity extends RoboActivity implements OnEditorActionListene
 
 		if (TextUtils.isEmpty(password))
 		{
+			LOGGER.info("password is empty. will focus passwordField.");
 			passwordField.setError(errorFieldRequired);
 			focusView = passwordField;
 		}
 		else if (password.length() < 4)
 		{
+			LOGGER.info("password is to short. will focus passwordField.");
 			passwordField.setError(errorInvalidPassword);
 			focusView = passwordField;
 		}
 
 		if (TextUtils.isEmpty(username))
 		{
+			LOGGER.info("username is empty. will focus usernameField.");
 			usernameField.setError(errorFieldRequired);
 			focusView = usernameField;
 		}
 		else if (username.length() < 2)
 		{
+			LOGGER.info("username is to short. will focus usernameField.");
 			usernameField.setError(errorInvalidUsername);
 			focusView = usernameField;
 		}
@@ -122,6 +133,7 @@ public class LoginActivity extends RoboActivity implements OnEditorActionListene
 		}
 		else
 		{
+			LOGGER.info("trying to login. starting loginTask");
 			statusMessageView.setText(loginProgressMessage);
 			loginTask.execute();
 		}

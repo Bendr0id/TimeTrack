@@ -20,7 +20,7 @@ import android.os.Build;
 import android.view.View;
 import android.widget.TextView;
 
-import com.vidi.timetrack.activities.ScanActivity;
+import com.vidi.timetrack.activities.TimeTrackActivity;
 
 public class LoginTask extends RoboAsyncTask<Boolean>
 {
@@ -84,7 +84,7 @@ public class LoginTask extends RoboAsyncTask<Boolean>
 		if (success)
 		{
 			LOGGER.info("login was successfull, starting ScanActivity.");
-			Intent intent = new Intent(activity, ScanActivity.class);
+			Intent intent = new Intent(activity, TimeTrackActivity.class);
 			activity.startActivity(intent);
 			activity.finish();
 		}

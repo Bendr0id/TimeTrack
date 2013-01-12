@@ -14,10 +14,10 @@ import android.widget.ListView;
 
 import com.vidi.timetrack.R;
 
-@ContentView(R.layout.activity_scan)
-public class ScanActivity extends RoboActivity implements OnClickListener
+@ContentView(R.layout.activity_timetrack)
+public class TimeTrackActivity extends RoboActivity implements OnClickListener
 {
-	private static final Logger LOGGER = LoggerFactory.getLogger(ScanActivity.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(TimeTrackActivity.class);
 
 	@InjectView(R.id.scan_button)
 	private Button scanButton;
