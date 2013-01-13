@@ -1,4 +1,4 @@
-package com.vidi.timetrack.entities;
+package com.vidi.timetrack.db.entities;
 
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
@@ -6,8 +6,8 @@ import com.j256.ormlite.table.DatabaseTable;
 @DatabaseTable(tableName = "gpsLocation")
 public class GpsLocation
 {
-	@DatabaseField(id = true, generatedId = true)
-	private int id;
+	@DatabaseField(generatedId = true)
+	public Integer id;
 
 	@DatabaseField
 	private Double lat;
@@ -24,12 +24,12 @@ public class GpsLocation
 
 	}
 
-	public int getId()
+	public Integer getId()
 	{
 		return id;
 	}
 
-	public void setId(int id)
+	public void setId(Integer id)
 	{
 		this.id = id;
 	}

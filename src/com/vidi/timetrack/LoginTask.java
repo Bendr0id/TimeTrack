@@ -70,7 +70,7 @@ public class LoginTask extends RoboAsyncTask<Boolean>
 			LOGGER.error("InterruptedException while sleeping {}ms in call. e: {}", SLEEP_TIME, e);
 		}
 
-		boolean loginResult = random.nextBoolean();
+		boolean loginResult = true; // random.nextBoolean();
 
 		LOGGER.info("simulated login was: {}", loginResult);
 		return loginResult;

@@ -1,4 +1,4 @@
-package com.vidi.timetrack.entities;
+package com.vidi.timetrack.db.entities;
 
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
@@ -6,16 +6,16 @@ import com.j256.ormlite.table.DatabaseTable;
 @DatabaseTable(tableName = "timeRecord")
 public class TimeRecord
 {
-	@DatabaseField(id = true, generatedId = true)
-	private int id;
+	@DatabaseField(generatedId = true)
+	public Integer id;
 
 	@DatabaseField
-	private String begin;
+	private Long begin;
 
 	@DatabaseField
-	private String end;
+	private Long end;
 
-	@DatabaseField
+	@DatabaseField(foreign = true, foreignAutoRefresh = true)
 	private Location location;
 
 	public TimeRecord()
@@ -23,32 +23,32 @@ public class TimeRecord
 
 	}
 
-	public int getId()
+	public Integer getId()
 	{
 		return id;
 	}
 
-	public void setId(int id)
+	public void setId(Integer id)
 	{
 		this.id = id;
 	}
 
-	public String getBegin()
+	public Long getBegin()
 	{
 		return begin;
 	}
 
-	public void setBegin(String begin)
+	public void setBegin(Long begin)
 	{
 		this.begin = begin;
 	}
 
-	public String getEnd()
+	public Long getEnd()
 	{
 		return end;
 	}
 
-	public void setEnd(String end)
+	public void setEnd(Long end)
 	{
 		this.end = end;
 	}
