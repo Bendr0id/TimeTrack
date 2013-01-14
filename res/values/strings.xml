@@ -2,5 +2,7 @@
 <resources>
 
     <string name="app_name">TimeTrack</string>
+
+    <string name="add_record">Add record</string>
   
 </resources>

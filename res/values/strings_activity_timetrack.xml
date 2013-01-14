@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    
-    <string name="scan">WiFi scan</string>
-    
+    <string name="location_tab">Locations</string>
+    <string name="record_tab">Records</string>
+    <string name="settings_tab">Settings</string>
 </resources>

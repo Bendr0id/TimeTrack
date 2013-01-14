@@ -1,79 +1,85 @@
 package com.vidi.timetrack.activities;
 
-import java.sql.SQLException;
-import java.util.List;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import roboguice.activity.RoboActivity;
 import roboguice.inject.ContentView;
-import roboguice.inject.InjectView;
+import roboguice.inject.InjectResource;
 import android.os.Bundle;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.Button;
-import android.widget.ListView;
+import android.support.v4.app.FragmentTransaction;
 
-import com.google.inject.Inject;
-import com.j256.ormlite.dao.Dao;
+import com.actionbarsherlock.app.ActionBar;
+import com.actionbarsherlock.app.ActionBar.Tab;
+import com.github.rtyley.android.sherlock.roboguice.activity.RoboSherlockFragmentActivity;
 import com.vidi.timetrack.R;
-import com.vidi.timetrack.db.entities.TimeRecord;
+import com.vidi.timetrack.fragments.LocationFragment;
+import com.vidi.timetrack.fragments.RecordFragment;
+import com.vidi.timetrack.fragments.SettingsFragment;
 
 @ContentView(R.layout.activity_timetrack)
-public class TimeTrackActivity extends RoboActivity implements OnClickListener
+public class TimeTrackActivity extends RoboSherlockFragmentActivity implements ActionBar.TabListener
 {
 	private static final Logger LOGGER = LoggerFactory.getLogger(TimeTrackActivity.class);
 
-	@InjectView(R.id.scan_button)
-	private Button scanButton;
+	@InjectResource(R.string.record_tab)
+	private String recordTab;
 
-	@InjectView(R.id.scan_result_listview)
-	private ListView scanResultListView;
+	@InjectResource(R.string.location_tab)
+	private String locationTab;
 
-	@Inject
-	private Dao<TimeRecord, Integer> timeRecordDao;
+	@InjectResource(R.string.settings_tab)
+	private String settingsTab;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
 
-		scanButton.setOnClickListener(this);
+		createActionBar();
+	}
 
-		try
+	private void createActionBar()
+	{
+		ActionBar bar = getSupportActionBar();
+		bar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+
+		bar.addTab(createTab(bar.newTab(), recordTab));
+		bar.addTab(createTab(bar.newTab(), locationTab));
+		bar.addTab(createTab(bar.newTab(), settingsTab));
+	}
+
+	private ActionBar.Tab createTab(ActionBar.Tab tab, String text)
+	{
+		tab.setText(text);
+		tab.setTabListener(this);
+
+		return tab;
+	}
+
+	@Override
+	public void onTabSelected(Tab tab, FragmentTransaction ft)
+	{
+		if (tab.getPosition() == 0)
 		{
-			List<TimeRecord> timeRecordList = timeRecordDao.queryForAll();
-			for (TimeRecord timeRecord : timeRecordList)
-			{
-				LOGGER.info("record: " + timeRecord);
-			}
+			ft.replace(android.R.id.content, new RecordFragment());
 		}
-		catch (SQLException e)
+		else if (tab.getPosition() == 1)
 		{
-			LOGGER.error("SQLException while fetching all records.", e);
+			ft.replace(android.R.id.content, new LocationFragment());
+		}
+		else
+		{
+			ft.replace(android.R.id.content, new SettingsFragment());
 		}
 	}
 
 	@Override
-	public void onClick(View v)
+	public void onTabUnselected(Tab tab, FragmentTransaction ft)
 	{
-		if (v == scanButton)
-		{
-			LOGGER.info("scan button was clicked.");
+	}
 
-			TimeRecord timeRecord = new TimeRecord();
-			timeRecord.setBegin(System.currentTimeMillis());
-
-			try
-			{
-				timeRecordDao.create(timeRecord);
-				LOGGER.info("created new timeRecord {}.", timeRecord);
-			}
-			catch (SQLException e)
-			{
-				LOGGER.error("failed to insert time record {}.", timeRecord, e);
-			}
-		}
+	@Override
+	public void onTabReselected(Tab tab, FragmentTransaction ft)
+	{
 	}
 }

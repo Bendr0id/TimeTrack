@@ -15,7 +15,7 @@ import com.vidi.timetrack.db.entities.BluetoothLocation;
 import com.vidi.timetrack.db.entities.GpsLocation;
 import com.vidi.timetrack.db.entities.Location;
 import com.vidi.timetrack.db.entities.NfcLocation;
-import com.vidi.timetrack.db.entities.TimeRecord;
+import com.vidi.timetrack.db.entities.Record;
 import com.vidi.timetrack.db.entities.WifiLocation;
 
 public class Database extends OrmLiteSqliteOpenHelper
@@ -24,12 +24,6 @@ public class Database extends OrmLiteSqliteOpenHelper
 	public Database(Context context)
 	{
 		super(context, "timetrack.db", null, 8);
-	}
-
-	protected List<Class<?>> getDatabaseTableList()
-	{
-		List<Class<?>> databaseTableList = Lists.<Class<?>> newArrayList(TimeRecord.class, Location.class, GpsLocation.class, WifiLocation.class, NfcLocation.class, BluetoothLocation.class);
-		return databaseTableList;
 	}
 
 	@Override
@@ -63,5 +57,10 @@ public class Database extends OrmLiteSqliteOpenHelper
 		{
 			throw new RuntimeException(e);
 		}
+	}
+
+	private List<Class<?>> getDatabaseTableList()
+	{
+		return Lists.<Class<?>> newArrayList(Record.class, Location.class, GpsLocation.class, WifiLocation.class, NfcLocation.class, BluetoothLocation.class);
 	}
 }

@@ -25,7 +25,7 @@ import com.vidi.timetrack.activities.TimeTrackActivity;
 public class LoginTask extends RoboAsyncTask<Boolean>
 {
 	private static final Logger LOGGER = LoggerFactory.getLogger(LoginTask.class);
-	private static final int SLEEP_TIME = 2000;
+	private static final int SLEEP_TIME = 500;
 
 	@InjectView(R.id.login_form)
 	private View loginView;

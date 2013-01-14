@@ -3,8 +3,8 @@ package com.vidi.timetrack.db.entities;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
-@DatabaseTable(tableName = "timeRecord")
-public class TimeRecord
+@DatabaseTable(tableName = "record")
+public class Record
 {
 	@DatabaseField(generatedId = true)
 	public Integer id;
@@ -18,7 +18,7 @@ public class TimeRecord
 	@DatabaseField(foreign = true, foreignAutoRefresh = true)
 	private Location location;
 
-	public TimeRecord()
+	public Record()
 	{
 
 	}
@@ -66,6 +66,6 @@ public class TimeRecord
 	@Override
 	public String toString()
 	{
-		return String.format("TimeRecord [id=%s, begin=%s, end=%s, location=%s]", id, begin, end, location);
+		return String.format("Record [id=%s, begin=%s, end=%s, location=%s]", id, begin, end, location);
 	}
 }

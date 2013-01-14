@@ -9,7 +9,7 @@ import com.vidi.timetrack.db.entities.BluetoothLocation;
 import com.vidi.timetrack.db.entities.GpsLocation;
 import com.vidi.timetrack.db.entities.Location;
 import com.vidi.timetrack.db.entities.NfcLocation;
-import com.vidi.timetrack.db.entities.TimeRecord;
+import com.vidi.timetrack.db.entities.Record;
 import com.vidi.timetrack.db.entities.WifiLocation;
 import com.vidi.timetrack.db.provider.DaoProvider;
 import com.vidi.timetrack.db.provider.DatabaseProvider;
@@ -24,8 +24,8 @@ public class Modules extends AbstractModule
 
 		bind(TransactionManager.class).toProvider(new TransactionManagerProvider());
 
-		bind(new TypeLiteral<Dao<TimeRecord, Integer>>()
-		{}).toProvider(new DaoProvider<Dao<TimeRecord, Integer>, TimeRecord>(TimeRecord.class));
+		bind(new TypeLiteral<Dao<Record, Integer>>()
+		{}).toProvider(new DaoProvider<Dao<Record, Integer>, Record>(Record.class));
 
 		bind(new TypeLiteral<Dao<Location, Integer>>()
 		{}).toProvider(new DaoProvider<Dao<Location, Integer>, Location>(Location.class));
