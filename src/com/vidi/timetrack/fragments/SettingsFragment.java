@@ -1,8 +1,5 @@
 package com.vidi.timetrack.fragments;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import roboguice.inject.ContentView;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -18,8 +15,6 @@ import com.vidi.timetrack.db.entities.Record;
 @ContentView(R.layout.fragment_settings)
 public class SettingsFragment extends RoboSherlockFragment
 {
-	private static final Logger LOGGER = LoggerFactory.getLogger(SettingsFragment.class);
-
 	@Inject
 	private Dao<Record, Integer> recordDao;
 

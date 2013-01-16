@@ -4,5 +4,7 @@
     <string name="app_name">TimeTrack</string>
 
     <string name="add_record">Add record</string>
+
+    <string name="menu_add_location">Add location</string>
   
 </resources>
