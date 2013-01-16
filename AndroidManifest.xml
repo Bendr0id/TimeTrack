@@ -23,7 +23,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.vidi.timetrack.activities.TimeTrackActivity" >
+        <activity android:name="com.vidi.timetrack.activities.MainTabActivity" >
         </activity>
     </application>
 
