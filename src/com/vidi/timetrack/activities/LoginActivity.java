@@ -1,66 +1,83 @@
 package com.vidi.timetrack.activities;
 
-import javax.inject.Inject;
+import java.util.Random;
 
+import org.androidannotations.annotations.AfterViews;
+import org.androidannotations.annotations.Background;
+import org.androidannotations.annotations.Click;
+import org.androidannotations.annotations.EActivity;
+import org.androidannotations.annotations.OptionsMenu;
+import org.androidannotations.annotations.UiThread;
+import org.androidannotations.annotations.ViewById;
+import org.androidannotations.annotations.res.IntegerRes;
+import org.androidannotations.annotations.res.StringRes;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import roboguice.activity.RoboActivity;
-import roboguice.inject.ContentView;
-import roboguice.inject.InjectResource;
-import roboguice.inject.InjectView;
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.KeyEvent;
-import android.view.Menu;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.TextView.OnEditorActionListener;
 
-import com.vidi.timetrack.LoginTask;
+import com.actionbarsherlock.app.SherlockActivity;
 import com.vidi.timetrack.R;
 
-@ContentView(R.layout.activity_login)
-public class LoginActivity extends RoboActivity implements OnEditorActionListener, OnClickListener
+@EActivity(R.layout.activity_login)
+@OptionsMenu(R.menu.activity_login)
+public class LoginActivity extends SherlockActivity implements OnEditorActionListener
 {
 	private static final Logger LOGGER = LoggerFactory.getLogger(LoginActivity.class);
 
-	@InjectView(R.id.username)
-	private EditText usernameField;
-	@InjectView(R.id.password)
-	private EditText passwordField;
-	@InjectView(R.id.sign_in_button)
-	private Button signinButton;
-	@InjectView(R.id.login_status_message)
-	private TextView statusMessageView;
+	private static final long SLEEP_TIME = 50;
 
-	@InjectResource(R.string.error_invalid_password)
-	private String errorInvalidPassword;
-	@InjectResource(R.string.error_invalid_username)
-	private String errorInvalidUsername;
-	@InjectResource(R.string.error_incorrect_password)
-	private String errorIncorrectPassword;
-	@InjectResource(R.string.error_field_required)
-	private String errorFieldRequired;
-	@InjectResource(R.string.login_progress_signing_in)
-	private String loginProgressMessage;
+	@ViewById(R.id.login_form)
+	View loginView;
+	@ViewById(R.id.login_status)
+	View statusView;
 
-	@Inject
-	private LoginTask loginTask;
+	@ViewById(R.id.username)
+	EditText usernameField;
+	@ViewById(R.id.password)
+	EditText passwordField;
+	@ViewById(R.id.sign_in_button)
+	Button signInButton;
+	@ViewById(R.id.login_status_message)
+	TextView statusMessageView;
+
+	@StringRes(R.string.error_invalid_password)
+	String errorInvalidPassword;
+	@StringRes(R.string.error_invalid_username)
+	String errorInvalidUsername;
+	@StringRes(R.string.error_incorrect_password)
+	String errorIncorrectPassword;
+	@StringRes(R.string.error_field_required)
+	String errorFieldRequired;
+	@StringRes(R.string.login_progress_signing_in)
+	String loginProgressMessage;
+
+	@IntegerRes(android.R.integer.config_shortAnimTime)
+	int shortAnimTime;
+
+	private Random random = new Random();
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
-
-		passwordField.setOnEditorActionListener(this);
-		signinButton.setOnClickListener(this);
 	}
 
-	@Override
+	@AfterViews
+	public void addOnActionListener()
+	{
+		passwordField.setOnEditorActionListener(this);
+	}
+
 	public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent)
 	{
 		if (textView == passwordField)
@@ -72,21 +89,10 @@ public class LoginActivity extends RoboActivity implements OnEditorActionListene
 		return false;
 	}
 
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu)
+	@Click
+	public void signInButton()
 	{
-		super.onCreateOptionsMenu(menu);
-		getMenuInflater().inflate(R.menu.activity_login, menu);
-		return true;
-	}
-
-	@Override
-	public void onClick(View view)
-	{
-		if (view == signinButton)
-		{
-			attemptLogin();
-		}
+		attemptLogin();
 	}
 
 	public void attemptLogin()
@@ -135,7 +141,77 @@ public class LoginActivity extends RoboActivity implements OnEditorActionListene
 		{
 			LOGGER.info("trying to login. starting loginTask");
 			statusMessageView.setText(loginProgressMessage);
-			loginTask.execute();
+			login();
 		}
+	}
+
+	@Background
+	public void login()
+	{
+		LOGGER.info("starting login task");
+		showProgress(true);
+
+		try
+		{
+			LOGGER.info("sleeping {}ms to simulate login.", SLEEP_TIME);
+			Thread.sleep(SLEEP_TIME);
+		}
+		catch (InterruptedException e)
+		{
+			LOGGER.error("InterruptedException while sleeping {}ms in call. e: {}", SLEEP_TIME, e);
+		}
+
+		showProgress(false);
+
+		if (random.nextBoolean())
+		{
+			loginSuccess();
+		}
+		else
+		{
+			loginFailed();
+		}
+	}
+
+	@UiThread
+	void showProgress(final boolean show)
+	{
+		statusView.setVisibility(View.VISIBLE);
+		statusView.animate().setDuration(shortAnimTime).alpha(show ? 1 : 0).setListener(new AnimatorListenerAdapter()
+		{
+			@Override
+			public void onAnimationEnd(Animator animation)
+			{
+				statusView.setVisibility(show ? View.VISIBLE : View.GONE);
+			}
+		});
+
+		loginView.setVisibility(View.VISIBLE);
+		loginView.animate().setDuration(shortAnimTime).alpha(show ? 0 : 1).setListener(new AnimatorListenerAdapter()
+		{
+			@Override
+			public void onAnimationEnd(Animator animation)
+			{
+				loginView.setVisibility(show ? View.GONE : View.VISIBLE);
+			}
+		});
+	}
+
+	@UiThread
+	void loginSuccess()
+	{
+		LOGGER.info("login was successfull, starting ScanActivity.");
+
+		MainTabActivity_.intent(this).start();
+		finish();
+	}
+
+	@UiThread
+	void loginFailed()
+	{
+		LOGGER.info("login was not successfull, display incorrect password error.");
+
+		passwordField.setError(errorIncorrectPassword);
+		passwordField.requestFocus();
 	}
 }
