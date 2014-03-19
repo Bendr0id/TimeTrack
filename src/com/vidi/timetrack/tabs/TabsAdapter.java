@@ -1,4 +1,4 @@
-package com.vidi.timetrack.adapter;
+package com.vidi.timetrack.tabs;
 
 import java.util.ArrayList;
 

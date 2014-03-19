@@ -11,10 +11,10 @@ import android.support.v4.view.ViewPager;
 import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.vidi.timetrack.R;
-import com.vidi.timetrack.adapter.TabsAdapter;
-import com.vidi.timetrack.fragments.LocationFragment_;
-import com.vidi.timetrack.fragments.RecordFragment_;
-import com.vidi.timetrack.fragments.SettingsFragment_;
+import com.vidi.timetrack.tabs.LocationFragment_;
+import com.vidi.timetrack.tabs.RecordFragment_;
+import com.vidi.timetrack.tabs.SettingsFragment_;
+import com.vidi.timetrack.tabs.TabsAdapter;
 
 @EActivity(R.layout.activity_maintab)
 public class MainTabActivity extends SherlockFragmentActivity

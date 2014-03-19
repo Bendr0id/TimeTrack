@@ -1,8 +1,11 @@
-package com.vidi.timetrack.fragments;
+package com.vidi.timetrack.wizard;
 
 import org.androidannotations.annotations.EFragment;
-import org.androidannotations.annotations.OptionsMenu;
 import org.androidannotations.annotations.OrmLiteDao;
+import org.androidannotations.annotations.res.StringArrayRes;
+import org.androidannotations.annotations.res.StringRes;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import android.os.Bundle;
 
@@ -12,12 +15,19 @@ import com.vidi.timetrack.R;
 import com.vidi.timetrack.db.DatabaseHelper;
 import com.vidi.timetrack.db.entities.Location;
 
-@EFragment(R.layout.fragment_location)
-@OptionsMenu(R.menu.fragment_location)
-public class LocationFragment extends SherlockFragment
+@EFragment(R.layout.fragment_wifi_wizard)
+public class WifiWizardFragment extends SherlockFragment
 {
+	private final static Logger LOGGER = LoggerFactory.getLogger(WifiWizardFragment.class);
+
 	@OrmLiteDao(helper = DatabaseHelper.class, model = Location.class)
 	Dao<Location, Integer> locationDao;
+
+	@StringRes
+	String locationWizardTitle;
+
+	@StringArrayRes
+	String[] locationItems;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState)

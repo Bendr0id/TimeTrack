@@ -2,9 +2,14 @@
 <resources>
 
     <string name="app_name">TimeTrack</string>
-
     <string name="add_record">Add record</string>
-
+    <string name="add_location">Add location</string>
     <string name="menu_add_location">Add location</string>
-  
+    <string name="location_wizard_title">Location Wizard</string>
+
+    <string-array name="location_items">
+        <item>Wifi</item>
+        <item>. . .</item>
+    </string-array>
+
 </resources>

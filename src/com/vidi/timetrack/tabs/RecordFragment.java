@@ -1,4 +1,4 @@
-package com.vidi.timetrack.fragments;
+package com.vidi.timetrack.tabs;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -34,7 +34,7 @@ public class RecordFragment extends SherlockFragment
 	@ViewById(R.id.recordListView)
 	ListView recordListView;
 
-	@ViewById(R.id.addRecordButton)
+	@ViewById
 	Button addRecordButton;
 
 	@Override

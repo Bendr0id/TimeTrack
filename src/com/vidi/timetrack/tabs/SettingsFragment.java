@@ -1,4 +1,4 @@
-package com.vidi.timetrack.fragments;
+package com.vidi.timetrack.tabs;
 
 import org.androidannotations.annotations.EFragment;
 import org.androidannotations.annotations.OrmLiteDao;
