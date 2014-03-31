@@ -8,7 +8,7 @@
     <string name="location_wizard_title">Location Wizard</string>
 
     <string-array name="location_items">
-        <item>Wifi</item>
+        <item>Geofece</item>
         <item>. . .</item>
     </string-array>
 

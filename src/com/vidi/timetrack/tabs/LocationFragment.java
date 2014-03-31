@@ -14,7 +14,6 @@ import org.slf4j.LoggerFactory;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.support.v4.app.FragmentTransaction;
 import android.widget.Button;
 
 import com.actionbarsherlock.app.SherlockFragment;
@@ -22,6 +21,7 @@ import com.j256.ormlite.dao.Dao;
 import com.vidi.timetrack.R;
 import com.vidi.timetrack.db.DatabaseHelper;
 import com.vidi.timetrack.db.entities.Location;
+import com.vidi.timetrack.wizard.GeofenceWizardActivity_;
 
 @EFragment(R.layout.fragment_location)
 @OptionsMenu(R.menu.fragment_location)
@@ -66,7 +66,7 @@ public class LocationFragment extends SherlockFragment
 				switch (which)
 				{
 					case 0:
-						showWifiWizardFragment();
+						showGeofenceWizardFragment();
 						break;
 					default:
 						break;
@@ -77,8 +77,10 @@ public class LocationFragment extends SherlockFragment
 		builder.create().show();
 	}
 
-	private void showWifiWizardFragment()
+	private void showGeofenceWizardFragment()
 	{
 		LOGGER.debug("will show wifi wizard.");
+
+		GeofenceWizardActivity_.intent(this).start();
 	}
 }

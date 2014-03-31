@@ -16,9 +16,9 @@ import com.vidi.timetrack.db.DatabaseHelper;
 import com.vidi.timetrack.db.entities.Location;
 
 @EFragment(R.layout.fragment_wifi_wizard)
-public class WifiWizardFragment extends SherlockFragment
+public class WifiFragment extends SherlockFragment
 {
-	private final static Logger LOGGER = LoggerFactory.getLogger(WifiWizardFragment.class);
+	private final static Logger LOGGER = LoggerFactory.getLogger(WifiFragment.class);
 
 	@OrmLiteDao(helper = DatabaseHelper.class, model = Location.class)
 	Dao<Location, Integer> locationDao;

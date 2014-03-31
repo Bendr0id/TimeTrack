@@ -1,9 +1,10 @@
 package com.vidi.timetrack.activities;
 
-import java.util.Random;
+import java.util.Map;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Background;
+import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.OptionsMenu;
@@ -13,6 +14,7 @@ import org.androidannotations.annotations.res.IntegerRes;
 import org.androidannotations.annotations.res.StringRes;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.web.client.RestClientException;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
@@ -27,14 +29,13 @@ import android.widget.TextView.OnEditorActionListener;
 
 import com.actionbarsherlock.app.SherlockActivity;
 import com.vidi.timetrack.R;
+import com.vidi.timetrack.api.TimeTrackMeClient;
 
 @EActivity(R.layout.activity_login)
 @OptionsMenu(R.menu.activity_login)
 public class LoginActivity extends SherlockActivity implements OnEditorActionListener
 {
 	private static final Logger LOGGER = LoggerFactory.getLogger(LoginActivity.class);
-
-	private static final long SLEEP_TIME = 50;
 
 	@ViewById(R.id.login_form)
 	View loginView;
@@ -64,7 +65,8 @@ public class LoginActivity extends SherlockActivity implements OnEditorActionLis
 	@IntegerRes(android.R.integer.config_shortAnimTime)
 	int shortAnimTime;
 
-	private Random random = new Random();
+	@Bean
+	TimeTrackMeClient timeTrackMeClient;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
@@ -153,24 +155,18 @@ public class LoginActivity extends SherlockActivity implements OnEditorActionLis
 
 		try
 		{
-			LOGGER.info("sleeping {}ms to simulate login.", SLEEP_TIME);
-			Thread.sleep(SLEEP_TIME);
+			Map<String, String> response = timeTrackMeClient.login(usernameField.getText().toString(), passwordField.getText().toString());
+
+			LOGGER.info("response: {}", response);
+			loginSuccess();
 		}
-		catch (InterruptedException e)
+		catch (RestClientException e)
 		{
-			LOGGER.error("InterruptedException while sleeping {}ms in call. e: {}", SLEEP_TIME, e);
+			LOGGER.error("error: {}", e);
+			loginFailed();
 		}
 
 		showProgress(false);
-
-		if (random.nextBoolean())
-		{
-			loginSuccess();
-		}
-		else
-		{
-			loginFailed();
-		}
 	}
 
 	@UiThread
