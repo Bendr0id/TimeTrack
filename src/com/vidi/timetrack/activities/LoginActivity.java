@@ -150,13 +150,11 @@ public class LoginActivity extends SherlockActivity implements OnEditorActionLis
 	@Background
 	public void login()
 	{
-		LOGGER.info("starting login task");
 		showProgress(true);
 
 		try
 		{
 			Map<String, String> response = timeTrackMeClient.login(usernameField.getText().toString(), passwordField.getText().toString());
-
 			LOGGER.info("response: {}", response);
 			loginSuccess();
 		}
