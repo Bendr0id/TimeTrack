@@ -1,10 +1,6 @@
-TimeTrack
+TimeTrack.me Android Client 1.0
 =========
 
-Do you ever want to know how long you stayed at a place? 
+This is a Android client for TimeTrack.me the free work time tracking site (http://timetrack.me)
 
-TimeTrack will provide you these information.
-
-Track your time by BlueTooth, WiFi, GPS, NFC or CellId.
-
-Add notes to each event, send periodic reports by mail or export your data as csv.
+It will track your times by Wifi, Geofence, BlueTooth, GPS, NFC or CellId and sync them to TimeTrack.me.
