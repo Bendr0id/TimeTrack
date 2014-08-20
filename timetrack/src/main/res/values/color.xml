@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="default_label_color">#222</color>
+    <color name="default_button_text_color">#fff</color>
+    <color name="transparent">#00000000</color>
+    <color name="yellow_mid">#fcc62c</color>
+    <color name="yellow_dark">#cd9700</color>
+    <color name="grey_light">#969696</color>
+    <color name="grey_mid">#505050</color>
+    <color name="grey_dark">#232323</color>
+    <color name="list_text">#333</color>
+    <color name="white">#FFFFFF</color>
+    <color name="grey_search_textview">#4B4B4B</color>
+    <color name="word_bar">#FF0000</color>
+    <color name="number_bar">#00FF00</color>
+    
+    <color name="default_edit_text_background_start">#EFF6FF</color>
+    <color name="default_edit_text_background_end">#FBFDFF</color>
+    
+    <color name="default_button_enabled">#1fb6ed</color>
+    <color name="default_button_enabled_border">#357ebd</color>
+    
+    <color name="default_button_pressed">#3276b1</color>
+    <color name="default_button_pressed_border">#285e8e</color>
+    
+    <color name="default_button_disabled">#7b7b7b</color>
+    <color name="default_button_disabled_border">#646464</color>
+    
+    <color name="toggle_button_normal">#d9534f</color>
+    <color name="toggle_button_normal_pressed">#ee5f5b</color>
+    <color name="toggle_button_normal_border">#d43f3a</color>
+    
+    <color name="toggle_button_checked">#5cb85c</color>
+    <color name="toggle_button_checked_pressed">#62c462</color>
+    <color name="toggle_button_checked_border">#4cae4c</color>
+    
+    <color name="drawer_list_item_text_color_normal">#fff</color>
+	<color name="drawer_list_item_text_color_pressed">#222</color>
+    <color name="drawer_list_item_text_color_selected">#222</color>
+    
+    <color name="drawer_list_item_background_pressed">#fff</color>
+    
+    <color name="translucent_background">#21000000</color>
+    <color name="main_background_start">#e7f2f5</color>
+    <color name="main_background_end">#949c9e</color>
+
+</resources>

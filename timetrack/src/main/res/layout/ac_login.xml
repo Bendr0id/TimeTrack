@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/main_background"
+    android:orientation="vertical" >
+    
+    <LinearLayout
+        android:id="@+id/login_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:orientation="vertical"
+        android:paddingBottom="10dp"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:paddingTop="70dp" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="5dp"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:text="@string/email"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="@color/default_label_color" />
+
+        <AutoCompleteTextView
+            android:id="@+id/email_field"
+            style="@style/DefaultEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:completionThreshold="1"
+            android:imeOptions="actionNext"
+            android:inputType="textEmailAddress"
+            android:nextFocusDown="@+id/et_password" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="5dp"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:paddingTop="10dp"
+            android:text="@string/password"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="@color/default_label_color" />
+
+        <EditText
+            android:id="@+id/password_field"
+            style="@style/DefaultEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:imeOptions="actionDone"
+            android:inputType="textPassword"
+            android:password="true" />
+
+        <Button
+            android:id="@+id/login_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:background="@drawable/default_button_states"
+            android:gravity="center"
+            android:onClick="handleLogin"
+            android:padding="10dp"
+            android:text="@string/login"
+            android:textColor="@color/default_button_text_color"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+</LinearLayout>
