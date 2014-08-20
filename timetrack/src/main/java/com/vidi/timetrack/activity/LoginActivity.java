@@ -79,6 +79,11 @@ public class LoginActivity extends Activity implements OnEditorActionListener
         emailField.setText(settings.email().get());
         passwordField.setText(settings.password().get());
 		passwordField.setOnEditorActionListener(this);
+
+        if (settings.email().exists() && settings.password().exists())
+        {
+            login();
+        }
 	}
 
 	public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent)
