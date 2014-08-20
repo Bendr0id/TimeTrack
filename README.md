@@ -1,4 +1,4 @@
-TimeTrack.me Android Client 1.0
+TimeTrack.me client for Android v1.0
 =========
 
 This is a Android client for TimeTrack.me the free work time tracking site (http://timetrack.me)
